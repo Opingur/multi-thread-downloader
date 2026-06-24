@@ -1,0 +1,9 @@
+__pycache__/
+*.py[cod]
+*.part
+*.state.json
+*.state.json.tmp
+.agents/
+.codex/
+.DS_Store
+Thumbs.db
