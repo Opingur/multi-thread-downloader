@@ -319,9 +319,16 @@ class DownloadApp(tk.Tk):
         self.progress = PixelProgress(body)
         self.progress.grid(row=4, column=1, columnspan=3, sticky="ew", pady=(4, 12))
 
-        self._label(body, "STATUS").grid(row=5, column=0, sticky="nw", pady=(4, 0))
+        actions = tk.Frame(body, bg=BG)
+        actions.grid(row=5, column=1, columnspan=3, sticky="e", pady=(4, 18))
+        self.start_button = PixelButton(actions, text="START DOWNLOAD", command=self._start)
+        self.start_button.pack(side="left", padx=(0, 10))
+        self.cancel_button = PixelButton(actions, text="CANCEL", command=self._cancel, state="disabled")
+        self.cancel_button.pack(side="left")
+
+        self._label(body, "STATUS").grid(row=6, column=0, sticky="nw", pady=(4, 0))
         status_box = tk.Frame(body, bg=BG)
-        status_box.grid(row=5, column=1, columnspan=3, sticky="ew", pady=(4, 0))
+        status_box.grid(row=6, column=1, columnspan=3, sticky="ew", pady=(4, 0))
         status_box.columnconfigure(0, weight=1)
 
         tk.Label(
@@ -350,13 +357,6 @@ class DownloadApp(tk.Tk):
             wraplength=640,
             justify="left",
         ).grid(row=2, column=0, sticky="ew", pady=(8, 0))
-
-        actions = tk.Frame(body, bg=BG)
-        actions.grid(row=6, column=0, columnspan=4, sticky="e", pady=(28, 0))
-        self.start_button = PixelButton(actions, text="START DOWNLOAD", command=self._start)
-        self.start_button.pack(side="left", padx=(0, 10))
-        self.cancel_button = PixelButton(actions, text="CANCEL", command=self._cancel, state="disabled")
-        self.cancel_button.pack(side="left")
 
     def _label(self, master, text: str) -> tk.Label:
         return tk.Label(master, text=text, bg=BG, fg=BLUE, font=FONT_MONO_SMALL, anchor="w")
